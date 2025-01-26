@@ -13,7 +13,7 @@ const PopularMenu = () => {
             setMenu(popularItem)})
     },[])
     return (
-       <section className="mb-12">
+       <section className="mb-12 text-center">
         <SectionTitle subHeading={'---Check it out---'}heading={'FROM OUR MENU'}>
 
         </SectionTitle>
@@ -28,6 +28,7 @@ const PopularMenu = () => {
 
 
         </div>
+        <button className="btn btn-outline border-0 border-b-4  mt-2 text-center">View Full Menu</button>
        </section>
     );
 };
