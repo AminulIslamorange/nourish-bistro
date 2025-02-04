@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBodSIk0V6m9oXVt3RSTOsTqwcIrAXhtgg",
-  authDomain: "nourish-restuarant.firebaseapp.com",
-  projectId: "nourish-restuarant",
-  storageBucket: "nourish-restuarant.firebasestorage.app",
-  messagingSenderId: "730153795678",
-  appId: "1:730153795678:web:a390308fd5569b2d76f4cf"
+  apiKey:import.meta.env.VITE_SOME_apiKey,
+  authDomain:import.meta.env.VITE_SOME_authDomain,
+  projectId:import.meta.env.VITE_SOME_projectId,
+  storageBucket:import.meta.env.VITE_SOME_storageBucket,
+  messagingSenderId:import.meta.env.VITE_SOME_messagingSenderId,
+  appId:import.meta.env.VITE_SOME_appId
 };
 
 // Initialize Firebase
