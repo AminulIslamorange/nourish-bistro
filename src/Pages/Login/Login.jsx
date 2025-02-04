@@ -1,17 +1,26 @@
 import loginImg from '../../assets/others/authentication2.png';
 import bgImg from '../../assets/others/authentication.png'
 import { loadCaptchaEnginge, LoadCanvasTemplate,validateCaptcha } from 'react-simple-captcha';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { AuthContext } from '../../Provider/AuthProvider';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const [disabled,setdisabled]=useState(true)
     const captchaRef=useRef(null);
+    const {loginUser}=useContext(AuthContext);
     const handleLogin = e => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
+        loginUser(email,password)
+        .then(result=>{
+            const user=result.user;
+            console.log(user);
+
+        })
+        .catch(error=>console.error(error))
     }
     useEffect(()=>{
         loadCaptchaEnginge(6); 
@@ -67,6 +76,7 @@ const Login = () => {
                             <input disabled={disabled} type="submit" value="Login" className="btn bg-[#D1A054] text-white hover:bg-[#b88640]"/>
                         </div>
                     </form>
+                    <p className='text-[#D1A054] text-center'>New here? <small><Link to='/signUp'>Create a New Account</Link></small></p>
                 </div>
 
                 {/* Image - Shadow Added */}
