@@ -3,13 +3,17 @@ import bgImg from '../../assets/others/authentication.png'
 import { loadCaptchaEnginge, LoadCanvasTemplate,validateCaptcha } from 'react-simple-captcha';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const Login = () => {
-    const [disabled,setdisabled]=useState(true)
+    const [disabled,setdisabled]=useState(true);
+    const navigate=useNavigate();
+    const location=useLocation();
     
     const {loginUser}=useContext(AuthContext);
+    const from=location.state?.from?.pathname || '/login';
+
     const handleLogin = e => {
         e.preventDefault();
         const form = e.target;
@@ -36,6 +40,7 @@ const Login = () => {
                   `
                 }
               });
+              navigate(from,{replace:true})
 
         })
         .catch(error=>console.error(error))
