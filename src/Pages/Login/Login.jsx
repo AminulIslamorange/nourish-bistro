@@ -12,7 +12,7 @@ const Login = () => {
     const location=useLocation();
     
     const {loginUser}=useContext(AuthContext);
-    const from=location.state?.from?.pathname || '/login';
+    const from=location.state?.from?.pathname || '/';
 
     const handleLogin = e => {
         e.preventDefault();
