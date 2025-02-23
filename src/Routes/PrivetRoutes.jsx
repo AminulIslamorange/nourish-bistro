@@ -7,7 +7,7 @@ const PrivetRoutes = ({children}) => {
     const {user,loading}=useContext(AuthContext);
     const location=useLocation();
     if(user){
-        return children
+        return children;
     }
     if(loading){
         return <progress className="progress w-56"></progress>
