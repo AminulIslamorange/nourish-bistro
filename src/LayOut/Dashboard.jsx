@@ -1,6 +1,8 @@
-import { FaHome, FaPaypal, FaShoppingCart } from "react-icons/fa";
+import { FaHome, FaPaypal, FaShopify, FaShoppingCart } from "react-icons/fa";
 import { FaCalendar } from "react-icons/fa6";
 import { GoCodeReview } from "react-icons/go";
+import { IoMenu } from "react-icons/io5";
+import { MdOutlineContactPhone } from "react-icons/md";
 import { TbBrandBooking } from "react-icons/tb";
 import { NavLink, Outlet } from "react-router-dom";
 
@@ -29,6 +31,20 @@ const Dashboard = () => {
                     </li>
                     <li>
                         <NavLink to='/dashboard/booking'><TbBrandBooking />My Booking</NavLink>
+                    </li>
+                    <div className="divider"></div>
+                    <li>
+                        <NavLink to='/'><FaHome/>  Home</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/menu'> <IoMenu />
+                         Menu</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/order/salad'><FaShopify />  Shop</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/'><MdOutlineContactPhone /> Contact</NavLink>
                     </li>
                 </ul>
 
