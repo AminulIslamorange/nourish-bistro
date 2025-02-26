@@ -5,9 +5,11 @@ import { IoMenu } from "react-icons/io5";
 import { MdOutlineContactPhone } from "react-icons/md";
 import { TbBrandBooking } from "react-icons/tb";
 import { NavLink, Outlet } from "react-router-dom";
+import useCart from "../hooks/useCart";
 
 
 const Dashboard = () => {
+    const [cart]=useCart();
     return (
         <div className="flex">
 
@@ -24,7 +26,7 @@ const Dashboard = () => {
                         <NavLink to='/dashboard/payment'><FaPaypal/> Payment History</NavLink>
                     </li>
                     <li>
-                        <NavLink to='/dashboard/cart'><FaShoppingCart/> My Cart</NavLink>
+                        <NavLink to='/dashboard/cart'><FaShoppingCart/> My Cart ({cart.length})</NavLink>
                     </li>
                     <li>
                         <NavLink to='/dashboard/review'><GoCodeReview /> Add Review</NavLink>
