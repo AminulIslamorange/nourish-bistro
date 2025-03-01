@@ -100,7 +100,7 @@ const Login = () => {
                             <input disabled={disabled} type="submit" value="Login" className="btn bg-[#D1A054] text-white hover:bg-[#b88640]"/>
                         </div>
                     </form>
-                    <p className='text-[#D1A054] text-center'>New here? <small><Link to='/signUp'>Create a New Account</Link></small></p>
+                    <p className='text-[#D1A054] text-center'>New here? <small><Link to='/signUp'className="text-[#D1A054] underline hover:text-blue-700">Create a New Account</Link></small></p>
                     <div className="text-center justify-center">
                     <SocialLogin ></SocialLogin>
                     </div>

@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 
 const SignUp = () => {
@@ -93,7 +94,15 @@ const SignUp = () => {
                             <input type="submit" value="Sign Up" className="btn bg-[#D1A054] text-white hover:bg-[#b88640]" />
                         </div>
                     </form>
-                    <p className='text-[#D1A054] text-center'>Already have an account? <small><Link to='/login'>Please Login</Link></small></p>
+                    <p className="text-[#D1A054] text-center">
+                        Already have an account?{" "}
+                        <small>
+                            <Link to="/login" className="text-[#D1A054] underline hover:text-blue-700">
+                                Please Login
+                            </Link>
+                        </small>
+                    </p>
+                    <SocialLogin></SocialLogin>
                 </div>
 
                 {/* Image - Shadow Added */}
