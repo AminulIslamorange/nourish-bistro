@@ -7,6 +7,7 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import Dashboard from "../LayOut/Dashboard";
 import Cart from "../Pages/Dashboard/Cart/Cart";
+import PrivetRoutes from "./PrivetRoutes";
 
 
 
@@ -43,7 +44,7 @@ export const router = createBrowserRouter([
   },
   {
     path:'/dashboard',
-    element:<Dashboard></Dashboard>,
+    element:<PrivetRoutes><Dashboard></Dashboard></PrivetRoutes>,
     children:[
       {
         path:'cart',

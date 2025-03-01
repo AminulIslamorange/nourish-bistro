@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import SocialLogin from '../../components/SocialLogin/SocialLogin';
 
 const Login = () => {
     const [disabled,setdisabled]=useState(true);
@@ -100,6 +101,9 @@ const Login = () => {
                         </div>
                     </form>
                     <p className='text-[#D1A054] text-center'>New here? <small><Link to='/signUp'>Create a New Account</Link></small></p>
+                    <div className="text-center justify-center">
+                    <SocialLogin ></SocialLogin>
+                    </div>
                 </div>
 
                 {/* Image - Shadow Added */}
@@ -107,6 +111,7 @@ const Login = () => {
                     <img src={loginImg} alt="" className="rounded-lg shadow-2xl w-full" />
                 </div>
             </div>
+            
         </div>
     );
 };
