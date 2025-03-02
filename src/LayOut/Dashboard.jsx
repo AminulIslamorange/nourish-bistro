@@ -7,12 +7,13 @@ import { TbBrandBooking } from "react-icons/tb";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import { PiUsersFourFill } from "react-icons/pi";
+import useAdmin from "../hooks/useAdmin";
 
 
 const Dashboard = () => {
     const [cart] = useCart();
     // Todo get admin from the database
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
     return (
         <div className="flex">
 
