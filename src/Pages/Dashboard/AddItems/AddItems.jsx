@@ -2,6 +2,7 @@ import { FaUtensils} from "react-icons/fa";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { useForm } from "react-hook-form"
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const image_hosting_key=import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosing_api=`https://api.imgbb.com/1/upload?key=${image_hosting_key}`
@@ -9,17 +10,37 @@ const image_hosing_api=`https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 
 const AddItems = () => {
     const axiosPublic=useAxiosPublic();
+    const axiosSecure=useAxiosSecure();
     const { register, handleSubmit } = useForm()
     const onSubmit = async(data) => {
-        console.log(data)
+        // console.log(data)
         // image upload to the imagebibi and get url
         const imageFile={image:data.image[0]}
         const res=await axiosPublic.post(image_hosing_api,imageFile,{
             headers:{
                 'content-type':'multipart/form-data'
             }
-        })
-        console.log(res.data);
+        });
+        if(res.data.success){
+            // now send the data to server with image url
+            const menuItem={
+                name:data.name,
+                category:data.category,
+                price:parseFloat(data.price),
+                recipe:data.recipe,
+                image:res.data.data.display_url
+            }
+            // now data send to the database
+
+            const menuRes=await axiosSecure.post('/menu',menuItem)
+            console.log(menuRes.data);
+            if(menuRes.data.insertedId){
+                // show successfull modal of toast
+
+                
+            }
+        }
+        // console.log(res.data);
     }
     return (
         <div>
