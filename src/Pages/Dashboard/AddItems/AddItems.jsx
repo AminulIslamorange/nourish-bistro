@@ -3,6 +3,7 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { useForm } from "react-hook-form"
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const image_hosting_key=import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosing_api=`https://api.imgbb.com/1/upload?key=${image_hosting_key}`
@@ -11,7 +12,7 @@ const image_hosing_api=`https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 const AddItems = () => {
     const axiosPublic=useAxiosPublic();
     const axiosSecure=useAxiosSecure();
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit,reset } = useForm()
     const onSubmit = async(data) => {
         // console.log(data)
         // image upload to the imagebibi and get url
@@ -36,6 +37,14 @@ const AddItems = () => {
             console.log(menuRes.data);
             if(menuRes.data.insertedId){
                 // show successfull modal of toast
+                reset();
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `${data.name} is added Successfully to the menu`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
 
                 
             }
@@ -54,7 +63,7 @@ const AddItems = () => {
                             <span className="label-text">Recipe Name</span>
 
                         </label>
-                        <input type="text" className="input input-bordered w-full" placeholder="Recipe Name" {...register("name*",)} />
+                        <input type="text" className="input input-bordered w-full" placeholder="Recipe Name" {...register("name")}  />
                     </div>
                     <div className="flex gap-24">
                         {/* category */}
@@ -63,7 +72,7 @@ const AddItems = () => {
                                 <span className="label-text">Category</span>
 
                             </label>
-                            <select {...register("category*",{ required: true})}
+                            <select {...register("category", { required: true })}
                                 defaultValue='default' className="select select-primary  ">
                                 <option disabled value='default'>Select a Category</option>
                                 <option value="Salad">Salad</option>
@@ -81,7 +90,7 @@ const AddItems = () => {
                                 <span className="label-text">Price</span>
 
                             </label>
-                            <input type="number" className="input input-bordered" placeholder=" Price" {...register("price*",{ required: true})} />
+                            <input type="number" className="input input-bordered" placeholder=" Price"{...register("price", { required: true })} />
                         </div>
 
 
@@ -89,7 +98,7 @@ const AddItems = () => {
                     </div>
                     <fieldset className="fieldset mx-4 my-2">
                         <legend className="fieldset-legend">Recepe Details</legend>
-                        <textarea {...register("recipe*",{ required: true})}  className="textarea h-24 w-full px-4" placeholder="Details"></textarea>
+                        <textarea  {...register("recipe", { required: true })}  className="textarea h-24 w-full px-4" placeholder="Details"></textarea>
                        
                     </fieldset>
                     <input type="file"{...register('image',{ required: true})} className="file-input m-4" /><br />
