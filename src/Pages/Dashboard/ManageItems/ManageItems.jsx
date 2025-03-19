@@ -5,6 +5,7 @@ import { FaEdit } from "react-icons/fa";
 import useMenu from "../../../hooks/useMenu";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 
 const ManageItems = () => {
@@ -81,9 +82,11 @@ const ManageItems = () => {
                   <td>{item.name}</td>
                   <td>$:{item.price}</td>
                   <th>
+                    <Link to={`/dashboard/updateItem/${item._id}`}>
                     <button className="btn btn-ghost text-xl bg-[#D1A054]">
                       <FaEdit></FaEdit>
                     </button>
+                    </Link>
                   </th>
                   <th>
                     <button

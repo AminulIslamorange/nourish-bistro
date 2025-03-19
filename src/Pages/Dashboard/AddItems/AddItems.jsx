@@ -12,7 +12,7 @@ const image_hosing_api=`https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 const AddItems = () => {
     const axiosPublic=useAxiosPublic();
     const axiosSecure=useAxiosSecure();
-    const { register, handleSubmit,reset } = useForm()
+    const { register, handleSubmit,reset } = useForm();
     const onSubmit = async(data) => {
         // console.log(data)
         // image upload to the imagebibi and get url
