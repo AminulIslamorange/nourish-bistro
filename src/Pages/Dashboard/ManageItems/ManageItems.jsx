@@ -2,13 +2,15 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 
 import { FaEdit } from "react-icons/fa";
+import useMenu from "../../../hooks/useMenu";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useMenu from "../../../hooks/useMenu";
+
 
 const ManageItems = () => {
   const [menu,refetch]=useMenu();
-  const axiosSecure = useAxiosSecure();
+  const axiosSecure=useAxiosSecure();
+  
   const handleDeleteItem = (item) => {
     Swal.fire({
       title: "Are you sure?",
@@ -17,28 +19,27 @@ const ManageItems = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then(async(result) => {
+      confirmButtonText: "Yes, delete it!"
+    }).then( async (result) => {
       if (result.isConfirmed) {
-        const res = await axiosSecure.delete(`/menu/${item._id}`);
-
-        if (res.data && res.data.deletedCount > 0) {
-          // to refetch update the ui
-          console.log("Item deleted successfully! Now refetching...");
+        const res=await axiosSecure.delete(`/menu/${item._id}`);
+        // console.log(res.data)
+        if(res.data.deletedCount > 0){
+          // refetch and update ui
           refetch();
-          
-
           Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Your item has been deleted",
-            showConfirmButton: false,
-            timer: 1500,
-          });
+          title: "Deleted!",
+          text: `${item.name} has been deleted.` ,
+          icon: "success"
+        });
+
         }
+        
       }
     });
-  };
+    
+        }
+   
   return (
     <div>
       <SectionTitle
