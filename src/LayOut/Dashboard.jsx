@@ -34,10 +34,10 @@ const Dashboard = () => {
                                 <NavLink to='/dashboard/userHome'><FaHome /> User Home</NavLink>
                             </li>
                             <li>
-                                <NavLink to='/dashboard/reservation'><FaCalendar /> Reservation</NavLink>
+                                <NavLink to='/dashboard/paymentHistory'><FaCalendar /> Payment History</NavLink>
                             </li>
                             <li>
-                                <NavLink to='/dashboard/payment'><FaPaypal /> Payment History</NavLink>
+                                <NavLink to='/dashboard/payment'><FaPaypal /> Payment </NavLink>
                             </li>
                             <li>
                                 <NavLink to='/dashboard/cart'><FaShoppingCart /> My Cart ({cart.length})</NavLink>
