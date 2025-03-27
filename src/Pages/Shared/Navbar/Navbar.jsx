@@ -3,34 +3,64 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { FaCartShopping } from "react-icons/fa6";
 import useCart from "../../../hooks/useCart";
-
+import useAdmin from "../../../hooks/useAdmin";
 
 const Navbar = () => {
-  const [cart]=useCart();
+  const [cart] = useCart();
+  const [isAdmin] = useAdmin();
   const { user, logOut } = useContext(AuthContext);
   const handleLogOut = () => {
     logOut()
-      .then(() => { })
-      .catch(error => console.error(error))
-  }
-  const navOption = <>
-    <li><Link to='/'>Home</Link></li>
-    <li><Link to='/menu'>Our Menu</Link></li>
-    <li><Link to='/order/salad'>Order</Link></li>
-    <li><Link to='/dashboard/cart'>
-      <button className="btn">
-      <FaCartShopping />
-        <div className="badge badge-secondary">+{cart.length}</div>
-      </button></Link></li>
+      .then(() => {})
+      .catch((error) => console.error(error));
+  };
+  const navOption = (
+    <>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/menu">Our Menu</Link>
+      </li>
+      <li>
+        <Link to="/order/salad">Order</Link>
+      </li>
+      {
+        user && isAdmin && <li>
+        <Link to="/dashboard/adminHome">Dashboard</Link>
+      </li>
+      }
+      {
+        user && !isAdmin && <li>
+        <Link to="/dashboard/userHome">Dashboard</Link>
+      </li>
+      }
 
-    {
-      user ? <>
-        <span className="text-xl text-white">{user?.displayName}</span>
-        <button onClick={handleLogOut} className="btn btn-ghost">LogOut</button>
-      </> :
-        <><li><Link to='login'>Login</Link></li> </>
-    }
-  </>
+      <li>
+        <Link to="/dashboard/cart">
+          <button className="btn">
+            <FaCartShopping />
+            <div className="badge badge-secondary">+{cart.length}</div>
+          </button>
+        </Link>
+      </li>
+
+      {user ? (
+        <>
+          <span className="text-xl text-white">{user?.displayName}</span>
+          <button onClick={handleLogOut} className="btn btn-ghost">
+            LogOut
+          </button>
+        </>
+      ) : (
+        <>
+          <li>
+            <Link to="login">Login</Link>
+          </li>{" "}
+        </>
+      )}
+    </>
+  );
   return (
     <div>
       <div className="navbar fixed z-30 bg-opacity-30 bg-black text-white mx-auto max-w-screen-xl">
@@ -42,33 +72,36 @@ const Navbar = () => {
                 className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor">
+                stroke="currentColor"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16" />
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
               </svg>
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            >
               {navOption}
-
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">NOURISH BISTRO<br />RESTAURANT</a>
+          <a className="btn btn-ghost text-xl">
+            NOURISH BISTRO
+            <br />
+            RESTAURANT
+          </a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            {navOption}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{navOption}</ul>
         </div>
         <div className="navbar-end">
           <a className="btn">Button</a>
         </div>
       </div>
-
     </div>
   );
 };

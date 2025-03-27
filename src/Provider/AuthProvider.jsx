@@ -68,6 +68,7 @@ export const AuthProvider = ({ children }) => {
                 .then(res=>{
                     if(res.data.token){
                         localStorage.setItem('access-token',res.data.token)
+                        setLoading(false)
                     }
                 })
 
@@ -75,8 +76,9 @@ export const AuthProvider = ({ children }) => {
             else{
                 // Remove token if token store in client site
                 localStorage.removeItem('access-token');
+                setLoading(false)
             }
-            setLoading(false)
+            
         })
         return () => {
             return unsubscribe();
